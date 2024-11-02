@@ -41,11 +41,14 @@ public class SkyboxScript : MonoBehaviour
 
     void GetTexture(int i)
     {
+        string path = fullPath + texNames[i] + ".png";
         textures[i] = new Texture2D(2, 2);
         textures[i].wrapMode = TextureWrapMode.Clamp;
-        //textures[i].mipmapCount = 1;
-        var rawData = System.IO.File.ReadAllBytes(fullPath + texNames[i] + ".hdr");
-        if (rawData != null) textures[i].LoadImage(rawData);
+        if (!System.IO.File.Exists(path))
+        {
+            var rawData = System.IO.File.ReadAllBytes(path);
+            if (rawData != null) textures[i].LoadImage(rawData);
+        }
     }
 
 
@@ -67,9 +70,9 @@ public class SkyboxScript : MonoBehaviour
     {
         for (int i = 0; i <= 5; i++)
         {
-            if (textures[i] == null) 
+            if (textures[i] == null)
             {
-            return false;
+                return false;
             }
         }
         return true;
