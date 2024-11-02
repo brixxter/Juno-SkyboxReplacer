@@ -98,7 +98,10 @@
     <Style id="set-mfd-sprite" color="WidgetInstruction" format="set sprite (0) [x] to (1)" tooltip="Sets the property of MFD sprite widget with the specified name." />
     <Style id="set-mfd-navball" color="WidgetInstruction" format="set navball (0) [x] to (1)" tooltip="Sets the property of MFD navball widget with the specified name." />
     <Style id="set-mfd-map" color="WidgetInstruction" format="set map (0) [x] to (1)" tooltip="Sets the property of MFD map widget with the specified name." />
-    <Style id="set-mfd-texture-setpixel" color="WidgetInstruction" format="set texture (0) pixel at x=(1), y=(2) to (3)" tooltip="Sets the pixel at the coordinate to the specified pixel. Note: Coordinates start at 1, not 0." />
+    <Style id="set-mfd-texture-setpixel" color="WidgetInstruction" format="set pixel in texture (0) at x=(1), y=(2) to (3)" tooltip="Sets the pixel at the coordinate to the specified pixel. Note: Coordinates start at 1, not 0." />
+    <Style id="set-mfd-texture-drawline" color="WidgetInstruction" format="draw line in texture (0) between x1=(1), y1=(2) and x2=(3), y2=(4) in (5)" tooltip="Draws a line in the specified color between the coordinates. Note: Coordinates start at 1, not 0." />
+    <Style id="set-mfd-texture-drawbox" color="WidgetInstruction" format="draw box in texture (0) between x1=(1), y1=(2) and x2=(3), y2=(4) in (5)" tooltip="Draws a box in the specified color between the coordinates. Note: Coordinates start at 1, not 0." />
+    <Style id="set-mfd-texture-drawtri" color="WidgetInstruction" format="draw tri in texture (0) between X=(1) Y=(2) in (3)" tooltip="Draws a triangle in the specified color between the coordinates. Note: Coordinates start at 1, not 0." />
     <Style id="set-mfd-texture-initialize" color="WidgetInstruction" format="initialize texture (0) width (1) and height (2)" tooltip="Initializes the texture to the specified width and height." />
     <Style id="prop-mfd-texture-getpixel" color="WidgetInstruction" format="get texture (0) pixel at x=(1), y=(2)" tooltip="Gets the pixel at the specified coordinates. Note: Coordinates start at 1, not 0." />
     <Style id="prop-mfd-gauge" color="WidgetExpression" format="get gauge (0) [x]" tooltip="Returns information about the MFD gauge with the specified name." />
@@ -541,6 +544,28 @@
         <Constant text="name" />
         <Constant number="1" />
         <Constant number="1" />
+        <Constant vector="0,0,0" />
+      </SetCraftProperty>
+      <SetCraftProperty style="set-mfd-texture-drawline" property="Mfd.Texture.DrawLine">
+        <Constant text="name" />
+        <Constant number="1" />
+        <Constant number="1" />
+        <Constant number="1" />
+        <Constant number="1" />
+        <Constant vector="0,0,0" />
+      </SetCraftProperty>
+      <SetCraftProperty style="set-mfd-texture-drawbox" property="Mfd.Texture.DrawBox">
+        <Constant text="name" />
+        <Constant number="1" />
+        <Constant number="1" />
+        <Constant number="1" />
+        <Constant number="1" />
+        <Constant vector="0,0,0" />
+      </SetCraftProperty>
+      <SetCraftProperty style="set-mfd-texture-drawtri" property="Mfd.Texture.DrawTri">
+        <Constant text="name" />
+        <Constant vector="1,1,1" />
+        <Constant vector="1,1,1" />
         <Constant vector="0,0,0" />
       </SetCraftProperty>
       <SetCraftProperty style="set-mfd-sprite" property="Mfd.Sprite.SetFillAmount">

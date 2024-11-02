@@ -1061,6 +1061,16 @@
             Career validation skip
             </summary>
         </member>
+        <member name="F:ModApi.Career.TechTreeID.QuickSave">
+            <summary>
+            Quick saving in flight
+            </summary>
+        </member>
+        <member name="F:ModApi.Career.TechTreeID.UndoRetry">
+            <summary>
+            Undoing or retrying in flight
+            </summary>
+        </member>
         <member name="F:ModApi.Career.TechTreeID.ChuteLength">
             <summary>
             The chute length
@@ -5777,6 +5787,29 @@
             <param name="comparer">The comparer to use.</param>
             <returns><c>true</c> if the enumerable set has duplicates; otherwise, <c>false</c>.</returns>
         </member>
+        <member name="T:ModApi.Common.Extensions.IReadOnlyListExtensions">
+            <summary>
+            A collection of extension methods for <see cref="T:System.Collections.Generic.IReadOnlyList`1"/>.
+            </summary>
+        </member>
+        <member name="M:ModApi.Common.Extensions.IReadOnlyListExtensions.First``1(System.Collections.Generic.IReadOnlyList{``0},System.Func{``0,System.Boolean})">
+            <summary>
+            Returns the first element in a sequence that satisfies a specified condition.
+            </summary>
+            <typeparam name="TSource">The type of the elements of source.</typeparam>
+            <param name="source">An <see cref="T:System.Collections.Generic.IReadOnlyList`1"/> to return an element from.</param>
+            <param name="predicate">A function to test each element for a condition.</param>
+            <returns>The first element in the sequence that passes the test in the specified predicate function.</returns>
+        </member>
+        <member name="M:ModApi.Common.Extensions.IReadOnlyListExtensions.FirstOrDefault``1(System.Collections.Generic.IReadOnlyList{``0},System.Func{``0,System.Boolean})">
+            <summary>
+            Returns the first element of the sequence that satisfies a condition or a default value if no such element is found.
+            </summary>
+            <typeparam name="TSource">The type of the elements of source.</typeparam>
+            <param name="source">An <see cref="T:System.Collections.Generic.IReadOnlyList`1"/> to return an element from.</param>
+            <param name="predicate">A function to test each element for a condition.</param>
+            <returns><c>default(TSource)</c> if source is empty or if no element passes the test specified by predicate; otherwise, the first element in source that passes the test specified by predicate.</returns>
+        </member>
         <member name="T:ModApi.Common.Extensions.LinkedListExtensions">
             <summary>
             A set of extension methods for LinkedList.
@@ -8428,6 +8461,11 @@
             The career contracts folder.
             </summary>
         </member>
+        <member name="F:ModApi.Constants.Paths.Resources.ContractsAddedFolder">
+            <summary>
+            Extra contracts for careers overriding the stock.
+            </summary>
+        </member>
         <member name="F:ModApi.Constants.Paths.Resources.CareerImagesFolder">
             <summary>
             The career images folder.
@@ -8436,6 +8474,11 @@
         <member name="F:ModApi.Constants.Paths.Resources.CareerCraftsFolder">
             <summary>
             The career crafts folder
+            </summary>
+        </member>
+        <member name="F:ModApi.Constants.Paths.Resources.CareerPayloadsFolder">
+            <summary>
+            The career payloads folder
             </summary>
         </member>
         <member name="F:ModApi.Constants.Paths.Resources.CareerFile">
@@ -15401,6 +15444,14 @@
             The payload tracking identifier, which is used for a contract to track a specific instance of a payload part.
             </value>
         </member>
+        <member name="P:ModApi.Craft.Parts.Modifiers.IPayload.CraftTrackingId">
+            <summary>
+            Gets the craft tracking identifier, which is used for a payload to define a specific tracking id on its parent craft.
+            </summary>
+            <value>
+            The craft tracking identifier, which is used for a payload to define a specific tracking id on its parent craft.
+            </value>
+        </member>
         <member name="T:ModApi.Craft.Parts.Modifiers.PayloadData">
             <summary>
             Part modifier for payload parts.
@@ -19947,11 +19998,12 @@
             <param name="sourceControls">The source controls.</param>
             <param name="destControls">The destination controls.</param>
         </member>
-        <member name="M:ModApi.Craft.CraftControls.ZeroControls(ModApi.Craft.CraftControls)">
+        <member name="M:ModApi.Craft.CraftControls.ZeroControls(ModApi.Craft.CraftControls,System.Boolean)">
             <summary>
             Sets all control inputs to zero for the specified <see cref="T:ModApi.Craft.CraftControls"/>
             </summary>
             <param name="controls">The controls to zero out input values for.</param>
+            <param name="zeroOffsets">Whether offsets should be zeroed.</param>
         </member>
         <member name="M:ModApi.Craft.CraftControls.GenerateStateXml">
             <summary>
@@ -23792,11 +23844,12 @@
             </summary>
             <param name="func">The function.</param>
         </member>
-        <member name="M:ModApi.Craft.Program.Craft.ICraftService.RequestUserInput(System.String)">
+        <member name="M:ModApi.Craft.Program.Craft.ICraftService.RequestUserInput(System.String,System.String)">
             <summary>
             Requests the user input.
             </summary>
             <param name="message">The message to display to the user.</param>
+            <param name="content">The content of the input box, empty by default.</param>
             <returns>The user input request, or null if another input request is currently pending.</returns>
         </member>
         <member name="M:ModApi.Craft.Program.Craft.ICraftService.SetActivationGroupState(System.Int32,System.Boolean)">
@@ -24276,6 +24329,34 @@
             <summary>
             Interface for a texture widget.
             </summary>
+        </member>
+        <member name="M:ModApi.Craft.Program.Craft.ITextureWidget.DrawBox(System.Int32,System.Int32,System.Int32,System.Int32,UnityEngine.Vector3)">
+            <summary>
+            Draws a box.
+            </summary>
+            <param name="x1">The starting x coordinate.</param>
+            <param name="y1">The starting y coordinate.</param>
+            <param name="x2">The ending x coordinate.</param>
+            <param name="y2">The ending y coordinate.</param>
+            <param name="c">The color.</param>
+        </member>
+        <member name="M:ModApi.Craft.Program.Craft.ITextureWidget.DrawLine(System.Int32,System.Int32,System.Int32,System.Int32,UnityEngine.Vector3)">
+            <summary>
+            Draws a line.
+            </summary>
+            <param name="x1">The starting x coordinate.</param>
+            <param name="y1">The starting y coordinate.</param>
+            <param name="x2">The ending x coordinate.</param>
+            <param name="y2">The ending y coordinate.</param>
+            <param name="c">The color.</param>
+        </member>
+        <member name="M:ModApi.Craft.Program.Craft.ITextureWidget.DrawTri(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3)">
+            <summary>
+            Draws a line.
+            </summary>
+            <param name="x">A vector 3 with all the X coordinates.</param>
+            <param name="y">A vector 3 with all the Y coordinates.</param>
+            <param name="c">The color.</param>
         </member>
         <member name="M:ModApi.Craft.Program.Craft.ITextureWidget.GetPixel(System.Int32,System.Int32)">
             <summary>
@@ -27449,7 +27530,7 @@
         </member>
         <member name="T:ModApi.Craft.Program.Instructions.UserInputInstruction">
             <summary>
-            Instruction to wait for a specified amount of time in seconds.
+            Instruction to request user input and set it to a variable.
             </summary>
             <seealso cref="T:ModApi.Craft.Program.Instructions.ProgramInstruction" />
         </member>
@@ -29155,6 +29236,14 @@
             The color of the exhaust.
             </value>
         </member>
+        <member name="P:ModApi.Craft.Propulsion.FuelType.ExhaustColorExpanded">
+            <summary>
+            Gets the expanded color of the exhaust.
+            </summary>
+            <value>
+            The color of the exhaust expanded.
+            </value>
+        </member>
         <member name="P:ModApi.Craft.Propulsion.FuelType.ExhaustColorTip">
             <summary>
             Gets the tip color of the exhaust.
@@ -29496,6 +29585,15 @@
             </summary>
             <value>
             The identifier.
+            </value>
+        </member>
+        <member name="P:ModApi.Craft.Propulsion.RocketEngineType.Ignitions">
+            <summary>
+            Gets a value indicating the number of ignitions the engine supports.
+            turned on.
+            </summary>
+            <value>
+            The number of ignitions the engine supports.
             </value>
         </member>
         <member name="P:ModApi.Craft.Propulsion.RocketEngineType.IsAbstractType">
@@ -39573,6 +39671,14 @@
               <c>true</c> if the nav sphere is visible; otherwise, <c>false</c>.
             </value>
         </member>
+        <member name="P:ModApi.Flight.UI.IFlightSceneUI.NavSphereHeadingVisible">
+            <summary>
+            Sets a value indicating whether nav sphere is currently visible.
+            </summary>
+            <value>
+              <c>true</c> if the nav sphere is visible; otherwise, <c>false</c>.
+            </value>
+        </member>
         <member name="P:ModApi.Flight.UI.IFlightSceneUI.Transform">
             <summary>
             Gets the transform.
@@ -40022,6 +40128,12 @@
             </summary>
             <param name="vector">The vector.</param>
             <returns>The flight vector.</returns>
+        </member>
+        <member name="M:ModApi.Flight.UI.INavSphere.GetVectorFunc">
+            <summary>
+            Gets a function for invoking <see cref="M:ModApi.Flight.UI.INavSphere.GetVector(ModApi.Flight.UI.NavSphereIndicatorType)"/>.
+            </summary>
+            <returns>A function for invoking <see cref="M:ModApi.Flight.UI.INavSphere.GetVector(ModApi.Flight.UI.NavSphereIndicatorType)"/>.</returns>
         </member>
         <member name="M:ModApi.Flight.UI.INavSphere.LockCurrentHeading">
             <summary>
@@ -45530,15 +45642,6 @@
             <param name="vector">The vector to round.</param>
             <param name="gridSize">Size of the grid.</param>
             <returns>The vector rounded to a certain "grid" size.</returns>
-        </member>
-        <member name="M:ModApi.Math.MathUtils.RoundToGrid(System.Single,System.Single)">
-            <summary>
-            Rounds a number to a certain "grid" size.
-            If the gridSize is zero, then number will be returned.
-            </summary>
-            <param name="number">The number.</param>
-            <param name="gridSize">Size of the grid.</param>
-            <returns>The number rounded to a certain "grid" size.</returns>
         </member>
         <member name="M:ModApi.Math.MathUtils.RoundToOdd(System.Int32,System.Boolean)">
             <summary>
@@ -60453,6 +60556,25 @@
             <param name="normalMaps">if set to <c>true</c> then generate normal maps too.</param>
             <param name="cliffs">if set to <c>true</c> then generate cliff colors too.</param>
         </member>
+        <member name="M:ModApi.Planet.PlanetCubemapUtility.CreateCubemaps(ModApi.Planet.IPlanetData,ModApi.Planet.TerrainGenerator,System.Int32,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Creates the cubemaps for the specified planet with the specified parameters.
+            </summary>
+            <param name="planet">The planet.</param>
+            <param name="terrainGenerator">The terrain generator to be used. If <c>null</c>, the default terrain generator for cubemaps will be used.
+            If running on a background thread, this must be passed in from the main thread as the terrain generator cannot be created on a background thread.</param>
+            <param name="size">The number of pixels along one edge of a cube face.</param>
+            <param name="downsampleIterations">The downsample iterations.</param>
+            <param name="normalMaps">if set to <c>true</c> then generate normal maps too.</param>
+            <param name="cliffs">if set to <c>true</c> then generate cliff colors too.</param>
+        </member>
+        <member name="M:ModApi.Planet.PlanetCubemapUtility.CreateCubemapsAsync(ModApi.Planet.IPlanetData)">
+            <summary>
+            Creates the cubemaps for the specified planet.
+            </summary>
+            <param name="planet">The planet data for which to create cubemaps.</param>
+            <returns>The enumerator for the coroutine.</returns>
+        </member>
         <member name="M:ModApi.Planet.PlanetCubemapUtility.CreateEquirectangularMap(ModApi.Planet.IPlanetData,System.Single)">
             <summary>
             Creates the equirectangular maps for the planet.
@@ -60472,6 +60594,13 @@
             <param name="lighting">if set to <c>true</c> then apply artificial lighting to the map.</param>
             <param name="saveMaps">if set to <c>true</c> [save maps].</param>
             <returns>The array of generated textures.</returns>
+        </member>
+        <member name="M:ModApi.Planet.PlanetCubemapUtility.CreateTerrainGeneratorForCubemaps(ModApi.Planet.IPlanetTerrainData)">
+            <summary>
+            Creates the terrain generator for cubemap generation.
+            </summary>
+            <param name="terrainData">The terrain data.</param>
+            <returns>The terrain generator for cubemap generation.</returns>
         </member>
         <member name="M:ModApi.Planet.PlanetCubemapUtility.Exists(ModApi.Planet.IPlanetData,ModApi.Planet.PlanetCubemapType,System.Int32)">
             <summary>
@@ -60542,6 +60671,18 @@
             <param name="source">The source texture data.</param>
             <param name="target">The target texture data.</param>
         </member>
+        <member name="M:ModApi.Planet.PlanetCubemapUtility.GenerateCubemapFaceCliffedData(System.Int32,System.Int32,Unity.Collections.NativeArray{Unity.Mathematics.float4},Unity.Collections.NativeArray{Unity.Mathematics.float4},ModApi.Planet.ITerrainGenerator,System.Boolean,System.Single)">
+            <summary>
+            Generates the color and height data for a single face in a cubemap.
+            </summary>
+            <param name="faceIndex">Index of the face.</param>
+            <param name="size">The size of the cubemap face.</param>
+            <param name="colorData">The texture data in which to store the color data.</param>
+            <param name="colorMax">The max color value per row.</param>
+            <param name="terrainGenerator">The terrain generator.</param>
+            <param name="hasWater">A value indicating if the planet has water.</param>
+            <param name="waterSmoothness">The smoothness value to use for the water (if applicable).</param>
+        </member>
         <member name="M:ModApi.Planet.PlanetCubemapUtility.GenerateCubemapFaceData(System.Int32,System.Int32,Unity.Collections.NativeArray{Unity.Mathematics.double3},ModApi.Common.MinMaxValue[],Unity.Collections.NativeArray{Unity.Mathematics.float4},Unity.Collections.NativeArray{Unity.Mathematics.float4},ModApi.Planet.ITerrainGenerator,System.Boolean,System.Single)">
             <summary>
             Generates the color and height data for a single face in a cubemap.
@@ -60550,18 +60691,6 @@
             <param name="size">The size of the cubemap face.</param>
             <param name="heightSamples">The height samples.</param>
             <param name="heightRanges">The height ranges (representing min/max per row).</param>
-            <param name="colorData">The texture data in which to store the color data.</param>
-            <param name="colorMax">The max color value per row.</param>
-            <param name="terrainGenerator">The terrain generator.</param>
-            <param name="hasWater">A value indicating if the planet has water.</param>
-            <param name="waterSmoothness">The smoothness value to use for the water (if applicable).</param>
-        </member>
-        <member name="M:ModApi.Planet.PlanetCubemapUtility.GenerateCubemapFaceCliffedData(System.Int32,System.Int32,Unity.Collections.NativeArray{Unity.Mathematics.float4},Unity.Collections.NativeArray{Unity.Mathematics.float4},ModApi.Planet.ITerrainGenerator,System.Boolean,System.Single)">
-            <summary>
-            Generates the color and height data for a single face in a cubemap.
-            </summary>
-            <param name="faceIndex">Index of the face.</param>
-            <param name="size">The size of the cubemap face.</param>
             <param name="colorData">The texture data in which to store the color data.</param>
             <param name="colorMax">The max color value per row.</param>
             <param name="terrainGenerator">The terrain generator.</param>
@@ -60578,24 +60707,6 @@
             <param name="heightRanges">The height ranges (representing min/max per row).</param>
             <param name="terrainGenerator">The terrain generator.</param>
             <param name="hasWater">A value indicating if the planet has water.</param>
-        </member>
-        <member name="M:ModApi.Planet.PlanetCubemapUtility.GenerateCubemapsSegment(System.Int32,System.Int32,System.Int32,UnityEngine.CubemapFace,ModApi.Planet.ITerrainGenerator,System.Double,System.Boolean,System.Single,Unity.Collections.NativeArray{Unity.Mathematics.double3},ModApi.Common.MinMaxValue[],Unity.Collections.NativeArray{Unity.Mathematics.float4},Unity.Collections.NativeArray{Unity.Mathematics.float4})">
-            <summary>
-            Generates one segment of the cubemaps.
-            This is intended to be used to divide cubemap generation work over multiple threads.
-            </summary>
-            <param name="yStart">The Y pixel start position.</param>
-            <param name="yEnd">The Y pixel end position.</param>
-            <param name="size">The size of the cubemaps in pixels ('256', '512', etc).</param>
-            <param name="face">The face of the cubemap.</param>
-            <param name="terrainGenerator">The terrain generator used to generate the cubemap.</param>
-            <param name="radius">The radius of the planet.</param>
-            <param name="hasWater">A value indicating if the planet has water.</param>
-            <param name="waterSmoothness">The smoothness value to use for the water (if applicable).</param>
-            <param name="heightSamples">The samples set used to store height data results.</param>
-            <param name="heightRanges">The height ranges (representing min/max per row).</param>
-            <param name="colors">The texture data in which to store the color data.</param>
-            <param name="colorMax">The max color value per row.</param>
         </member>
         <member name="M:ModApi.Planet.PlanetCubemapUtility.GenerateCubemapsCliffedSegment(System.Int32,System.Int32,System.Int32,UnityEngine.CubemapFace,ModApi.Planet.ITerrainGenerator,System.Boolean,System.Single,Unity.Collections.NativeArray{Unity.Mathematics.float4},Unity.Collections.NativeArray{Unity.Mathematics.float4})">
             <summary>
@@ -60626,6 +60737,24 @@
             <param name="hasWater">A value indicating if the planet has water.</param>
             <param name="heightSamples">The samples set used to store height data results.</param>
             <param name="heightRanges">The height ranges (representing min/max per row).</param>
+        </member>
+        <member name="M:ModApi.Planet.PlanetCubemapUtility.GenerateCubemapsSegment(System.Int32,System.Int32,System.Int32,UnityEngine.CubemapFace,ModApi.Planet.ITerrainGenerator,System.Double,System.Boolean,System.Single,Unity.Collections.NativeArray{Unity.Mathematics.double3},ModApi.Common.MinMaxValue[],Unity.Collections.NativeArray{Unity.Mathematics.float4},Unity.Collections.NativeArray{Unity.Mathematics.float4})">
+            <summary>
+            Generates one segment of the cubemaps.
+            This is intended to be used to divide cubemap generation work over multiple threads.
+            </summary>
+            <param name="yStart">The Y pixel start position.</param>
+            <param name="yEnd">The Y pixel end position.</param>
+            <param name="size">The size of the cubemaps in pixels ('256', '512', etc).</param>
+            <param name="face">The face of the cubemap.</param>
+            <param name="terrainGenerator">The terrain generator used to generate the cubemap.</param>
+            <param name="radius">The radius of the planet.</param>
+            <param name="hasWater">A value indicating if the planet has water.</param>
+            <param name="waterSmoothness">The smoothness value to use for the water (if applicable).</param>
+            <param name="heightSamples">The samples set used to store height data results.</param>
+            <param name="heightRanges">The height ranges (representing min/max per row).</param>
+            <param name="colors">The texture data in which to store the color data.</param>
+            <param name="colorMax">The max color value per row.</param>
         </member>
         <member name="M:ModApi.Planet.PlanetCubemapUtility.GetWrappedIndex(System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
@@ -60918,6 +61047,14 @@
             </summary>
             <value>
             The music keywords, used to determine what music may be played for this planet. Music with *any* of the given keywords may play.
+            </value>
+        </member>
+        <member name="P:ModApi.Planet.IPlanetData.MusicIntensityExpression">
+            <summary>
+            Gets the expression to drive the music intensity.
+            </summary>
+            <value>
+            The expression to drive the music intensity.
             </value>
         </member>
         <member name="P:ModApi.Planet.IPlanetData.Name">
@@ -61243,6 +61380,11 @@
             A collection of keywords that may be used by mods however they see fit to make use of them.
             </summary>
         </member>
+        <member name="F:ModApi.Planet.PlanetDataScript._musicIntensityExpression">
+            <summary>
+            The music intensity expression, used to determine the intensity of the music through a funky expression.
+            </summary>
+        </member>
         <member name="F:ModApi.Planet.PlanetDataScript._musicKeywords">
             <summary>
             The music keywords, used to determine what music may be played for this planet. Music with *any* of the given keywords may play.
@@ -61500,6 +61642,14 @@
             Gets a collection of keywords that may be used by mods however they see fit to make use of them.
             </summary>
             <value>A collection of keywords that may be used by mods however they see fit to make use of them.</value>
+        </member>
+        <member name="P:ModApi.Planet.PlanetDataScript.MusicIntensityExpression">
+            <summary>
+            Gets the music keywords, used to determine what music may be played for this planet. Music with *any* of the given keywords may play.
+            </summary>
+            <value>
+            The music keywords, used to determine what music may be played for this planet. Music with *any* of the given keywords may play.
+            </value>
         </member>
         <member name="P:ModApi.Planet.PlanetDataScript.MusicKeywords">
             <summary>
@@ -68181,6 +68331,16 @@
             A value indicating whether this static class has been initialized.
             </summary>
         </member>
+        <member name="F:ModApi.Scenes.SceneSkybox._isCustom">
+            <summary>
+            A value indicating whether a custom skybox has been loaded by the planetary system.
+            </summary>
+        </member>
+        <member name="F:ModApi.Scenes.SceneSkybox._isSubscribed">
+            <summary>
+            A value indicating whether the skybox quality setting has been subscribed to.
+            </summary>
+        </member>
         <member name="F:ModApi.Scenes.SceneSkybox._materialInstance">
             <summary>
             The material instance.
@@ -68204,11 +68364,12 @@
             </summary>
             <param name="sceneManager">The scene manager.</param>
         </member>
-        <member name="M:ModApi.Scenes.SceneSkybox.ReplaceSkybox(UnityEngine.Material)">
+        <member name="M:ModApi.Scenes.SceneSkybox.ReplaceSkybox(UnityEngine.Material,System.Boolean)">
             <summary>
             Replaces the skybox with the specified material.
             </summary>
             <param name="material">The new skybox material.</param>
+            <param name="isCustom">Whether the current skybox is custom.</param>
         </member>
         <member name="M:ModApi.Scenes.SceneSkybox.UnloadSkybox">
             <summary>
@@ -68227,12 +68388,26 @@
             </summary>
             <returns>The current skybox material instance.</returns>
         </member>
+        <member name="M:ModApi.Scenes.SceneSkybox.OnSceneLoaded(System.Object,ModApi.Scenes.Events.SceneEventArgs)">
+            <summary>
+            Handles the <see cref="E:SceneUnloaded" /> event.
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="e">The <see cref="T:ModApi.Scenes.Events.SceneEventArgs"/> instance containing the event data.</param>
+        </member>
         <member name="M:ModApi.Scenes.SceneSkybox.OnSceneUnloaded(System.Object,ModApi.Scenes.Events.SceneEventArgs)">
             <summary>
             Handles the <see cref="E:SceneUnloaded" /> event.
             </summary>
             <param name="sender">The sender.</param>
             <param name="e">The <see cref="T:ModApi.Scenes.Events.SceneEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:ModApi.Scenes.SceneSkybox.OnSkyboxQualityChanged(System.Object,ModApi.Settings.Core.Events.SettingChangedEventArgs{ModApi.Settings.VisualEffectsQualitySettings.SkyboxQuality})">
+            <summary>
+            Called when the skybox quality changes.
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="e">The e.</param>
         </member>
         <member name="T:ModApi.Scenes.SceneSkybox.ShaderPropertyIds">
             <summary>
@@ -68345,6 +68520,14 @@
             </summary>
             <value>The feature for using the tinker panel in the designer.</value>
         </member>
+        <member name="P:ModApi.Services.Purchasing.IInAppPurchaseFeatures`1.DevConsole">
+            <summary>
+            Gets the feature for access to the dev console.
+            </summary>
+            <value>
+            The feature for access to the dev console.
+            </value>
+        </member>
         <member name="P:ModApi.Services.Purchasing.IInAppPurchaseFeatures`1.InFlightCheats">
             <summary>
             Gets the feature for in-flight cheats.
@@ -68380,6 +68563,12 @@
             Gets the feature for modifying part properties of landing gear.
             </summary>
             <value>The feature for modifying part properties of landing gear.</value>
+        </member>
+        <member name="P:ModApi.Services.Purchasing.IInAppPurchaseFeatures`1.PartPropertiesPropellerAssembly">
+            <summary>
+            Gets the feature for modifying part properties of propeller assembly.
+            </summary>
+            <value>The feature for modifying part properties of propeller assembly.</value>
         </member>
         <member name="P:ModApi.Services.Purchasing.IInAppPurchaseFeatures`1.PartPropertiesResizableWheels">
             <summary>
@@ -68428,6 +68617,21 @@
             Gets the feature for Vizzy.
             </summary>
             <value>The feature for Vizzy.</value>
+        </member>
+        <member name="P:ModApi.Services.Purchasing.IInAppPurchaseFeatures`1.WingCurves">
+            <summary>
+            Gets the feature for saving custom wing curves.
+            </summary>
+            <value>The feature for saving custom wing curves.</value>
+        </member>
+        <member name="M:ModApi.Services.Purchasing.IInAppPurchaseFeatures`1.IsFeatureUnlocked(ModApi.Services.Purchasing.IInAppPurchaseFeature,System.String,ModApi.Services.Purchasing.IInAppPurchaseFeature)">
+            <summary>
+            Checks if a feature is unlocked and prompts the player with a popup telling them its not available if not.
+            </summary>
+            <param name="feature">The feature being used.</param>
+            <param name="message">The specific message to be added in the prompt in the format "Upgrade to the BUNDLE to MESSAGE".</param>
+            <param name="comboFeature">A second feature necessary for the unlock".</param>
+            <returns>Whether the feature is unlocked or not, displaying a message if it is locked.</returns>
         </member>
         <member name="M:ModApi.Services.Purchasing.IInAppPurchaseFeatures`1.CareerCustomer(System.String)">
             <summary>
@@ -68593,6 +68797,47 @@
             </summary>
             <param name="productId">The product identifier.</param>
             <returns>The asynchronous task with the result of the purchase.</returns>
+        </member>
+        <member name="T:ModApi.Services.Purchasing.RequiresPurchaseException">
+            <summary>
+            Occurs when a user attempts to access a feature that they do not have access yet because
+            they don't own an in-app purchase.
+            </summary>
+            <seealso cref="T:System.Exception" />
+        </member>
+        <member name="M:ModApi.Services.Purchasing.RequiresPurchaseException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModApi.Services.Purchasing.RequiresPurchaseException"/> class.
+            </summary>
+        </member>
+        <member name="M:ModApi.Services.Purchasing.RequiresPurchaseException.#ctor(System.String,ModApi.Services.Purchasing.IInAppPurchaseFeature[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModApi.Services.Purchasing.RequiresPurchaseException" /> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="requiredFeatures">The required features.</param>
+        </member>
+        <member name="M:ModApi.Services.Purchasing.RequiresPurchaseException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModApi.Services.Purchasing.RequiresPurchaseException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="inner">The inner.</param>
+        </member>
+        <member name="M:ModApi.Services.Purchasing.RequiresPurchaseException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ModApi.Services.Purchasing.RequiresPurchaseException"/> class.
+            </summary>
+            <param name="info">The information.</param>
+            <param name="context">The context.</param>
+        </member>
+        <member name="P:ModApi.Services.Purchasing.RequiresPurchaseException.RequiredFeatures">
+            <summary>
+            Gets the product id(s) that must be purchased to have access to this feature.
+            </summary>
+            <value>
+            The product id(s) that must be purchased to have access to this feature.
+            </value>
         </member>
         <member name="T:ModApi.Settings.AudioSettings">
             <summary>
@@ -70105,6 +70350,11 @@
         <member name="F:ModApi.Settings.Core.SettingsCategoryPreset.VeryHigh">
             <summary>
             The very high preset.
+            </summary>
+        </member>
+        <member name="F:ModApi.Settings.Core.SettingsCategoryPreset.Ultra">
+            <summary>
+            The ultra preset.
             </summary>
         </member>
         <member name="F:ModApi.Settings.Core.SettingsCategoryPreset.Custom">
@@ -73268,12 +73518,13 @@
             A setting indicating whether terrain and water receive shadows.
             </value>
         </member>
-        <member name="M:ModApi.Settings.ShadowQualitySettings.ConfigureLight(UnityEngine.Light,ModApi.Settings.ShadowQualitySettings.LightType)">
+        <member name="M:ModApi.Settings.ShadowQualitySettings.ConfigureLight(UnityEngine.Light,ModApi.Settings.ShadowQualitySettings.LightType,System.Boolean)">
             <summary>
             Configures the light based on the current quality settings.
             </summary>
             <param name="light">The light.</param>
             <param name="type">The type of the light.</param>
+            <param name="enabled">Whether the shadows are enabled.</param>
         </member>
         <member name="M:ModApi.Settings.ShadowQualitySettings.ConfigurePartRenderer(UnityEngine.Renderer)">
             <summary>
@@ -74002,6 +74253,26 @@
             Anisotropic filtering will always be used. This improves the look of textures at steep viewing angles.
             </summary>
         </member>
+        <member name="T:ModApi.Settings.VisualEffectsQualitySettings.SkyboxQuality">
+            <summary>
+            An enumeration defining the atmosphere quality levels.
+            </summary>
+        </member>
+        <member name="F:ModApi.Settings.VisualEffectsQualitySettings.SkyboxQuality.Medium">
+            <summary>
+            Low quality atmosphere rendering effects are applied.
+            </summary>
+        </member>
+        <member name="F:ModApi.Settings.VisualEffectsQualitySettings.SkyboxQuality.High">
+            <summary>
+            High quality atmosphere rendering effects are applied.
+            </summary>
+        </member>
+        <member name="F:ModApi.Settings.VisualEffectsQualitySettings.SkyboxQuality.Ultra">
+            <summary>
+            Super high subdivisions to make the atmosphere edge smooth.
+            </summary>
+        </member>
         <member name="T:ModApi.Settings.VisualEffectsQualitySettings.AtmosphereQuality">
             <summary>
             An enumeration defining the atmosphere quality levels.
@@ -74130,6 +74401,14 @@
             The anisotropic filtering mode quality setting.
             </value>
         </member>
+        <member name="P:ModApi.Settings.VisualEffectsQualitySettings.Skybox">
+            <summary>
+            Gets the skybox quality setting.
+            </summary>
+            <value>
+            The skybox quality setting.
+            </value>
+        </member>
         <member name="P:ModApi.Settings.VisualEffectsQualitySettings.Atmosphere">
             <summary>
             Gets the atmosphere quality setting.
@@ -74137,6 +74416,12 @@
             <value>
             The atmosphere quality setting.
             </value>
+        </member>
+        <member name="P:ModApi.Settings.VisualEffectsQualitySettings.DesignerLightingPartThreshold">
+            <summary>
+            Gets the designer light quality part threshold setting.
+            </summary>
+            <value>The designer light quality part threshold setting.</value>
         </member>
         <member name="P:ModApi.Settings.VisualEffectsQualitySettings.Explosions">
             <summary>
@@ -80877,6 +81162,14 @@
               <c>true</c> if any dialogs are currently open; otherwise, <c>false</c>.
             </value>
         </member>
+        <member name="P:ModApi.Ui.IUserInterface.Camera">
+            <summary>
+            Gets the UI camera of the scene or null if the scene does not have a UI camera.
+            </summary>
+            <value>
+            The UI camera of the scene or null if the scene does not have a UI camera.
+            </value>
+        </member>
         <member name="P:ModApi.Ui.IUserInterface.IgnoreKeyboardInputs">
             <summary>
             Gets a value indicating whether keyboard inputs should be ignored
@@ -82805,6 +83098,15 @@
             <param name="quat2">The quat2.</param>
             <param name="epsilon">The epsilon.</param>
             <returns><c>true</c> if the two quaternions are approximately equal; <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:ModApi.Utilities.CompareTextFiles(System.String,System.String,System.Boolean)">
+            <summary>
+            Compares the text files.
+            </summary>
+            <param name="filePath1">The path to the first text file to compare.</param>
+            <param name="filePath2">The path to the second text file to compare.</param>
+            <param name="ignoreLineEndings">If set to <c>true</c>, the comparison ignores possible line-ending differences.</param>
+            <returns><c>true</c> if both files are the same, otherwise <c>false</c></returns>
         </member>
         <member name="M:ModApi.Utilities.CompareVector3ds(UnityEngine.Vector3d,UnityEngine.Vector3d,System.Double)">
             <summary>

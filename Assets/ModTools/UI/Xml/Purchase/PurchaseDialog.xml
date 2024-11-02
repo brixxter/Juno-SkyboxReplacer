@@ -62,6 +62,14 @@
               <Image internalId="screenshot" raycastTarget="true" border="Primary"></Image>
             </RectTransform>
           </RectTransform>
+          <VerticalLayout id="complete-edition-template" active="false" spacing="25" padding="25" contentSizeFitter="vertical">
+            <TextMeshPro fontSize="22" class="" text="&quot;Juno: New Origins Complete Edition&quot; is for players who prefer a one-time purchase." />
+            <TextMeshPro fontSize="18" class="" text="It is a separate app on the store and is equivalent to purchasing all in-app purchases in this free-to-play version." />
+            <TextMeshPro fontSize="18" color="LabelText" text="Please note, progress from this free-to-play version will not be transferred." />
+            <Panel preferredHeight="256">
+              <Image image="Ui/Icons/CompleteEdition-AppIcon-256" aspectMode="FitInParent" />
+            </Panel>
+          </VerticalLayout>
           <Image id="card-template" class="card" rectAlignment="MiddleCenter" minWidth="320" minHeight="480" active="false" color="Transparent">
             <RectTransform internalId="card-root">
               <Image internalId="card-background" class="card-background" image="Ui/Sprites/Purchase/CardBackground" raycastTarget="true" onClick="OnCardClicked(this);">

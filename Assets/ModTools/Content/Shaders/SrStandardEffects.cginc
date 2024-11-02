@@ -235,7 +235,9 @@
             #if defined(POINT) || defined(POINT_COOKIE) || defined(SPOT)
                 return normalize(_WorldSpaceLightPos0.xyz - worldPosition);
             #else
-                return _WorldSpaceLightPos0.xyz;
+                // This should return _WorldSpaceLightPos0.xyz but Unity doesn't seem to be reliably setting this variable during the additive pass.
+                //return _WorldSpaceLightPos0.xyz;
+                return _directionalLightAdditive_Direction;
             #endif
         #endif
     }

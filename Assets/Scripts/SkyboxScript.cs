@@ -1,12 +1,11 @@
 using ModApi.Mods;
 using ModApi.Settings.Core;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts;
 using UnityEngine.Networking;
 using System;
 using UnityEngine.UI;
+using UnityEngine.Experimental.Rendering;
 
 public class SkyboxScript : MonoBehaviour
 {
@@ -26,6 +25,7 @@ public class SkyboxScript : MonoBehaviour
         texNames = new string[6] { "PositiveZ", "NegativeZ", "PositiveX", "NegativeX", "PositiveY", "NegativeY" };
         textures = new Texture2D[6];
 
+
         string gamePath, modPath;
 
         modPath = "/Mods/SkyboxReplacer/";
@@ -43,7 +43,8 @@ public class SkyboxScript : MonoBehaviour
     {
         textures[i] = new Texture2D(2, 2);
         textures[i].wrapMode = TextureWrapMode.Clamp;
-        var rawData = System.IO.File.ReadAllBytes(fullPath + texNames[i] + ".png");
+        //textures[i].mipmapCount = 1;
+        var rawData = System.IO.File.ReadAllBytes(fullPath + texNames[i] + ".hdr");
         if (rawData != null) textures[i].LoadImage(rawData);
     }
 
@@ -66,7 +67,10 @@ public class SkyboxScript : MonoBehaviour
     {
         for (int i = 0; i <= 5; i++)
         {
-            if (textures[i] == null) return false;
+            if (textures[i] == null) 
+            {
+            return false;
+            }
         }
         return true;
     }

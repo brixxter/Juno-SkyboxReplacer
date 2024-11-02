@@ -54,6 +54,7 @@
     half _ambientLightMinFalloff;
     half _lightingFresnelBias;
     float _maxColorValue;
+    float3 _directionalLightAdditive_Direction;
 
     // Setup common defines
     #if !UNITY_PASS_FORWARDADD

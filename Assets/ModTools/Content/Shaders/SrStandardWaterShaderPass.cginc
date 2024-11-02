@@ -105,7 +105,7 @@ inline fixed2 GetWaveNormal(sampler2D tex, float2 uv)
 
 inline half Fresnel(half3 viewVector, half3 worldNormal, half bias)
 {
-    half facing =  clamp(1.0 - max(dot(viewVector, worldNormal), 0.0), 0.0, 1.0);
+    half facing = saturate(1.0 - dot(viewVector, worldNormal));
     return saturate(bias + ((1.0 - bias) * facing * facing * facing));
 }
 
@@ -218,6 +218,10 @@ inline half4 ApplyWaterEffects(v2f INPUT, fixed3 normal, half4 fragColor, float3
 
             // Fade the reflection out at a distance
             half reflectionStrength = INPUT.uv3.x * (1 - _IsUnderWater) * (1 - saturate((fragDepth - 50000) * 0.00002)) * atmosphereReflectionFade;
+    
+            // Fade the reflection out at an angle based on texture strength to emulate waves making the water rough
+            reflectionStrength *= pow(saturate(1.1 - Fresnel(-pixelDir, INPUT.worldNormal, 0)), 0.3 * _ReflectionDistortionStrength);
+    
             indirectSpecular *= reflectionStrength;
 
             // Blend the reflection texture based on reflection strength

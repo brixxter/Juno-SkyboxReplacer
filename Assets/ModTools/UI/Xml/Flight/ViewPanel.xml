@@ -130,6 +130,9 @@
     <ContentButton class="view-button audio-btn-click" id="camera-orbit-chase" tooltip="Chase View" onClick="OnCameraModeClicked(this);">
       <Image sprite="Ui/Sprites/Flight/IconCameraChase" />
     </ContentButton>
+    <ContentButton class="view-button audio-btn-click" id="camera-orbit-sr1" tooltip="2D View" onClick="OnCameraModeClicked(this);">
+      <Image sprite="Ui/Sprites/Flight/IconCamera2D" />
+    </ContentButton>
     <ContentButton class="view-button audio-btn-click" id="camera-fly-by-cinematic" tooltip="Fly-By Cinematic" onClick="OnCameraModeClicked(this);">
       <Image sprite="Ui/Sprites/Flight/IconCameraFlyBy" />
     </ContentButton>

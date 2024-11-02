@@ -10,12 +10,6 @@
       <Component type="UnityEngine.MeshRenderer" />
     </GameObject>
     <GameObject name="CenterOfThrust">
-      <GameObject name="NozzleDepthMask">
-        <Component type="UnityEngine.MeshFilter" />
-        <Component type="UnityEngine.MeshRenderer" />
-        <Component type="ModApi.Craft.Parts.PartMeshScript" />
-        <Component type="ModApi.Craft.Parts.DepthMaskScript" />
-      </GameObject>
       <GameObject name="ParticleSystem">
         <Component type="UnityEngine.ParticleSystem" />
         <Component type="UnityEngine.ParticleSystemRenderer" />
@@ -24,6 +18,12 @@
         <Component type="UnityEngine.MeshFilter" />
         <Component type="UnityEngine.MeshRenderer" />
         <Component type="ModApi.Craft.Parts.PartMeshScript" />
+        <GameObject name="NozzleDepthMask">
+          <Component type="UnityEngine.MeshFilter" />
+          <Component type="UnityEngine.MeshRenderer" />
+          <Component type="ModApi.Craft.Parts.PartMeshScript" />
+          <Component type="ModApi.Craft.Parts.DepthMaskScript" />
+        </GameObject>
       </GameObject>
     </GameObject>
   </GameObject>

@@ -60,6 +60,12 @@
       <Panel class="center-panel">
         <Image class="center-panel-back" />
         <Image class="center-panel-front" />
+        <RectTransform id="upgrade-button" active="false" offsetXY="125 0" rectAlignment="MiddleLeft" width="50" height="50">
+          <Image sprite="Ui/Sprites/Menu/IconStore" raycastTarget="true" pivot="0.5 0.5" onClick="OnUpgradeButtonClicked(this);" />
+        </RectTransform>
+        <RectTransform id="notification-button" offsetXY="-125 0" rectAlignment="MiddleRight" width="32" height="32">
+          <Image id="notification-button-image" active="false" sprite="Ui/Sprites/Menu/NotificationButton" color="Red" pivot="0.5 0.5" raycastTarget="true" />
+        </RectTransform>
         <Panel offsetMin="100 0" offsetMax="-100 0">
           <TextMeshPro id="company-text" class="modern" fontSize="36" />
         </Panel>
@@ -152,9 +158,6 @@
         </RectTransform>
       </RectTransform>
     </Panel>
-    <RectTransform id="notification-button">
-      <Image id="notification-button-image" active="false" sprite="Ui/Sprites/Menu/NotificationButton" rectAlignment="UpperRight" pivot="0.5 0.5" offsetXY="-50 -50" width="32" height="32" raycastTarget="true" />
-    </RectTransform>
     <Panel active="false" id="file-menu" raycastTarget="true" onClick="OnFileMenuCloseClicked();">
       <Panel class="menu-panel" rectAlignment="MiddleCenter" scale="0.6">
         <VerticalLayout height="163" width="1280" padding="20" contentSizeFitter="vertical">

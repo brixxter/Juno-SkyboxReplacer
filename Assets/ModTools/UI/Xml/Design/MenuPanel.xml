@@ -4,11 +4,11 @@
   <Defaults></Defaults>
   <VerticalScrollView class="no-image">
     <VerticalLayout class="no-image" childForceExpandHeight="false" padding="20" spacing="10" contentSizeFitter="vertical">
-      <Button class="btn btn-primary" rectAlignment="LowerLeft" onClick="OnDownloadCraftButtonClicked();" tooltip="Open your web browser to the crafts download page.">
+      <Button class="btn" rectAlignment="LowerLeft" onClick="OnDownloadCraftButtonClicked();" tooltip="Open your web browser to the crafts download page.">
         <TextMeshPro text="DOWNLOAD CRAFTS" />
       </Button>
       <Image class="separator" />
-      <Button class="btn btn-danger freemium-only" rectAlignment="LowerLeft" onClick="OnPurchaseButtonClicked();" tooltip="See how you can upgrade your experience.">
+      <Button class="btn btn-primary freemium-only" rectAlignment="LowerLeft" onClick="OnPurchaseButtonClicked();" tooltip="See how you can upgrade your experience.">
         <TextMeshPro text="UPGRADE" />
       </Button>
       <Image class="separator freemium-only" />
