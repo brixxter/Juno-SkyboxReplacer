@@ -9,7 +9,7 @@ using UnityEngine.Experimental.Rendering;
 
 public class SkyboxScript : MonoBehaviour
 {
-    private string[] texNames;
+    private string[] texNames, formats;
     public string fullPath;
     private Texture2D[] textures;
 
@@ -23,6 +23,7 @@ public class SkyboxScript : MonoBehaviour
     {
 
         texNames = new string[6] { "PositiveZ", "NegativeZ", "PositiveX", "NegativeX", "PositiveY", "NegativeY" };
+        formats = new string[3] { ".png", ".jpg", ".dds" };
         textures = new Texture2D[6];
 
 
@@ -32,20 +33,22 @@ public class SkyboxScript : MonoBehaviour
         gamePath = Application.persistentDataPath;
         fullPath = gamePath + modPath;
 
-        //Debug.Log("Attempting to load skybox textures from " + fullPath);
-
-        for (int i = 0; i <= 5; i++) GetTexture(i);
+        for (int f = 0; f < formats.Length && !ValidityCheck(); f++)
+        {
+            for (int i = 0; i <= 5; i++) GetTexture(i, f);
+        }
         FinalizeTextures();
     }
 
 
-    void GetTexture(int i)
+    void GetTexture(int i, int f)
     {
-        string path = fullPath + texNames[i] + ".png";
-        textures[i] = new Texture2D(2, 2);
-        textures[i].wrapMode = TextureWrapMode.Clamp;
-        if (System.IO.File.Exists(path))
+        string path = fullPath + texNames[i] + formats[f];
+        if (System.IO.File.Exists(path) && textures[i] == null)
         {
+            textures[i] = new Texture2D(2, 2);
+            textures[i].wrapMode = TextureWrapMode.Clamp;
+
             var rawData = System.IO.File.ReadAllBytes(path);
             if (rawData != null) textures[i].LoadImage(rawData);
         }
