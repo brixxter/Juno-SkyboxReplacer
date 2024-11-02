@@ -28,6 +28,8 @@
 
 .vscode/
 
+ModAssetBundles/
+
 # Gradle cache directory
 .gradle/
 
